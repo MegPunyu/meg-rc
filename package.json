@@ -1,21 +1,12 @@
 {
-  "name": "meg-rc",
-  "version": "2.0.0",
-  "description": "A simple radix converter.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "prepare": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MegPunyu/meg-rc.git"
-  },
+  "author": "MegPunyu",
   "bugs": {
     "url": "https://github.com/MegPunyu/meg-rc/issues"
   },
+  "dependencies": {
+    "typescript": "^4.8.4"
+  },
+  "description": "A simple radix converter.",
   "homepage": "https://github.com/MegPunyu/meg-rc#readme",
   "keywords": [
     "radix",
@@ -24,9 +15,19 @@
     "number",
     "decimal"
   ],
-  "author": "MegPunyu",
   "license": "MIT",
-  "dependencies": {
-    "typescript": "^4.8.4"
-  }
+  "main": "dist/index.js",
+  "name": "meg-rc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MegPunyu/meg-rc.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "version": "2.0.1"
 }

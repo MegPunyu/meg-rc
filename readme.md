@@ -12,7 +12,7 @@ npm install meg-rc
 ## Usage
 ### decimal <-> base 52
 ```javascript
-import { RadixConverter } from "meg-rc";
+import RadixConverter from "meg-rc";
 
 const numerals  = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const converter = new RadixConverter(numerals);
@@ -23,7 +23,7 @@ converter.intoDecimal("8m0Kx");    // 123456789
 
 ### base 7 <-> base 3
 ```javascript
-import { RadixConverter } from "meg-rc";
+import RadixConverter from "meg-rc";
 
 const base7 = new RadixConverter("0123456");
 const base3 = new RadixConverter("012");
@@ -35,7 +35,7 @@ let c = base3.intoDecimal(b);         // 121221020(3) => 12345(10)
 
 ### base 9 <-> base 4 (variant)
 ```javascript
-import { RadixConverter } from "meg-rc";
+import RadixConverter from "meg-rc";
 
 const base9 = new RadixConverter("012345678");
 const base4 = new RadixConverter("four");
@@ -49,7 +49,7 @@ base4.intoDecimal("fouuufoo");  // 6789
 
 ### Reuse of converter (base 6 -> base 8)
 ```javascript
-import { RadixConverter } from "meg-rc";
+import RadixConverter from "meg-rc";
 
 const base6 = new RadixConverter("012345");
 const base8 = new RadixConverter("01234567");

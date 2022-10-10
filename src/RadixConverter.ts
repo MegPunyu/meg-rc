@@ -1,16 +1,45 @@
-export class RadixConverter {
+/**
+ * A simple radix converter.
+ */
+export default class RadixConverter {
+    /**
+     * Radix to be converted.
+     */
     public readonly radix: number;
+
+    /**
+     * Sequence of numerals used to represent an base n number.
+     */
     public readonly numerals: string;
+
+    /**
+     * Object storing pairs of numbers and their values.
+     */
     public readonly numeral_values: { [numeral: string]: number };
 
+    /**
+     * Constructor. 
+     * 
+     * @param numerals Sequence of numerals used to represent an base n number.
+     * @example
+     * const base16 = new RadixConverter("0123456789abcdef");
+     */
     public constructor(numerals: string) {
         this.radix = numerals.length;
         this.numerals = numerals;
         this.numeral_values = {};
+
         numerals.split("").forEach((e, i) => this.numeral_values[e] = i);
     }
 
-    /* Converts a decimal number to a base n number. */
+    /**
+     * Converts a decimal number to a base n number. 
+     * 
+     * @param num a decimal number
+     * @example
+     * const base16 = new RadixConverter("0123456789abcdef");
+     * base16.fromDecimal(10);  // "a"
+     */
     public fromDecimal(num: number): string {
         let result: string = "";
         let d: number = Math.floor(+num);
@@ -27,7 +56,14 @@ export class RadixConverter {
         return result;
     }
 
-    /* Converts a base n number to a decimal number. */
+    /**
+     * Converts a base n number to a decimal number. 
+     * 
+     * @param num a base n number
+     * @example
+     * const base16 = new RadixConverter("0123456789abcdef");
+     * base16.intoDecimal("a");  // 10
+     */
     public intoDecimal(num: string): number {
         const len: number = num.length;
         let result: number = 0;
@@ -45,12 +81,28 @@ export class RadixConverter {
         return result;
     }
 
-    /* Returns a base n to base n' converter (e.g. base2.convertInto(base16)("1110") === "e" ). */
+    /**
+     * Returns a base n to base n' converter
+     * 
+     * @example
+     * const base16 = new RadixConverter("0123456789abcdef");
+     * const base2  = new RadixConverter("01");
+     * 
+     * base2.convertInto(base16)("1110");  // "e"
+     */
     public convertInto(converter: RadixConverter): (num: string) => string {
         return num => converter.fromDecimal(this.intoDecimal(num));
     }
 
-    /* Returns a base n' to base n converter (e.g. base16.convertInto(base2)("e") === "1110" ). */
+    /**
+     * Returns a base n' to base n converter
+     * 
+     * @example
+     * const base16 = new RadixConverter("0123456789abcdef");
+     * const base2  = new RadixConverter("01");
+     * 
+     * base16.convertInto(base2)("e");  // "1110"
+     */
     public convertFrom(converter: RadixConverter): (num: string) => string {
         return converter.convertInto(this);
     }
