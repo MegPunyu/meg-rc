@@ -41,7 +41,7 @@ export default class RadixConverter {
      * base16.fromDecimal(10);  // "a"
      */
     public fromDecimal(num: number): string {
-        let result: string = "";
+        let result = "";
         let d: number = Math.floor(+num);
 
         if (!Number.isFinite(d)) {
@@ -66,7 +66,7 @@ export default class RadixConverter {
      */
     public intoDecimal(num: string): number {
         const len: number = num.length;
-        let result: number = 0;
+        let result = 0;
 
         for (let i = 0; i < len; ++i) {
             const d: number = this.numeral_values[num[i]];

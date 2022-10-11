@@ -7,6 +7,11 @@
     "typescript": "^4.8.4"
   },
   "description": "A simple radix converter.",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
+    "eslint": "^8.25.0"
+  },
   "homepage": "https://github.com/MegPunyu/meg-rc#readme",
   "keywords": [
     "radix",
@@ -25,9 +30,9 @@
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint src/**/*.ts"
   },
   "type": "module",
   "types": "dist/index.d.ts",
-  "version": "2.0.1"
+  "version": "2.0.3"
 }
