@@ -36,6 +36,7 @@ export default class RadixConverter {
      * Converts a decimal number to a base n number. 
      * 
      * @param num a decimal number
+     * @throws {SyntaxError} if the number is not finite
      * @example
      * const base16 = new RadixConverter("0123456789abcdef");
      * base16.fromDecimal(10);  // "a"
@@ -45,7 +46,7 @@ export default class RadixConverter {
         let d: number = Math.floor(+num);
 
         if (!Number.isFinite(d)) {
-            throw new Error(`invalid number: ${num}`);
+            throw new SyntaxError(`invalid number: ${num}`);
         }
 
         do {
@@ -60,6 +61,7 @@ export default class RadixConverter {
      * Converts a base n number to a decimal number. 
      * 
      * @param num a base n number
+     * @throws {SyntaxError} if incorrect numeral is given
      * @example
      * const base16 = new RadixConverter("0123456789abcdef");
      * base16.intoDecimal("a");  // 10
@@ -72,7 +74,7 @@ export default class RadixConverter {
             const d: number = this.numeral_values[num[i]];
 
             if (d === void 0) {
-                throw new Error(`invalid numeral: ${num[i]}`);
+                throw new SyntaxError(`invalid numeral: ${num[i]}`);
             }
 
             result += d * this.radix ** (len - i - 1);
