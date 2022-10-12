@@ -18,5 +18,11 @@
     "plugins": [
         "@typescript-eslint"
     ],
-    "root": true
+    "root": true,
+    "rules": {
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
 }
