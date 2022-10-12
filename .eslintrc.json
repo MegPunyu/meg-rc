@@ -20,8 +20,8 @@
     ],
     "root": true,
     "rules": {
-        "semi": [
-            "error",
+        "@typescript-eslint/semi": [
+            "warn",
             "always"
         ]
     }
