@@ -84,8 +84,9 @@ export default class RadixConverter {
     }
 
     /**
-     * Returns a base n to base n' converter
+     * Returns a function that converts a number from base n to base n'.
      * 
+     * @param converter instance of RadixConverter of the destination radix
      * @example
      * const base16 = new RadixConverter("0123456789abcdef");
      * const base2  = new RadixConverter("01");
@@ -97,8 +98,9 @@ export default class RadixConverter {
     }
 
     /**
-     * Returns a base n' to base n converter
+     * Returns a function that converts a number from base n' to base n.
      * 
+     * @param converter instance of RadixConverter of the source radix
      * @example
      * const base16 = new RadixConverter("0123456789abcdef");
      * const base2  = new RadixConverter("01");
