@@ -10,12 +10,12 @@ export default class RadixConverter {
     /**
      * Sequence of numerals used to represent an base n number.
      */
-    public readonly numerals: string;
+    public readonly numerals: string[];
 
     /**
-     * Object storing pairs of numbers and their values.
+     * Map storing pairs of numbers and their values.
      */
-    public readonly numeral_values: { [numeral: string]: number };
+    public readonly numeralValues: Map<string, number>;
 
     /**
      * Constructor. 
@@ -25,11 +25,11 @@ export default class RadixConverter {
      * const base16 = new RadixConverter("0123456789abcdef");
      */
     public constructor(numerals: string) {
-        this.radix = numerals.length;
-        this.numerals = numerals;
-        this.numeral_values = {};
+        this.numerals = [...numerals];
+        this.radix = this.numerals.length;
+        this.numeralValues = new Map();
 
-        numerals.split("").forEach((e, i) => this.numeral_values[e] = i);
+        [...numerals].forEach((e, i) => this.numeralValues.set(e, i));
     }
 
     /**
@@ -42,19 +42,19 @@ export default class RadixConverter {
      * base16.fromDecimal(10);  // "a"
      */
     public fromDecimal(num: number): string {
-        let result = "";
-        let d: number = Math.floor(+num);
+        let result: string[] = [];
+        let d = Math.floor(+num);
 
         if (!Number.isFinite(d)) {
             throw new SyntaxError(`invalid number: ${num}`);
         }
 
         do {
-            result = this.numerals[d % this.radix] + result;
+            result.push(this.numerals[d % this.radix]);
             d = Math.floor(d / this.radix);
         } while (d !== 0);
 
-        return result;
+        return result.reverse().join("");
     }
 
     /**
@@ -67,20 +67,17 @@ export default class RadixConverter {
      * base16.intoDecimal("a");  // 10
      */
     public intoDecimal(num: string): number {
-        const len: number = num.length;
-        let result = 0;
+        return [...num]
+            .map((c, i, a) => {
+                const d = this.numeralValues.get(c);
 
-        for (let i = 0; i < len; ++i) {
-            const d: number = this.numeral_values[num[i]];
+                if (d === void 0) {
+                    throw new SyntaxError(`invalid numeral: ${c}`);
+                }
 
-            if (d === void 0) {
-                throw new SyntaxError(`invalid numeral: ${num[i]}`);
-            }
-
-            result += d * this.radix ** (len - i - 1);
-        }
-
-        return result;
+                return d * this.radix ** (a.length - i - 1);
+            })
+            .reduce((a, b) => a + b);
     }
 
     /**
