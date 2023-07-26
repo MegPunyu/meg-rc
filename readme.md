@@ -65,3 +65,37 @@ b = convert68(b);  // 15232(6) => 4644(8)
 base8.intoDecimal(a);  // 2515(8) => 1357(10)
 base8.intoDecimal(b);  // 4644(8) => 2468(10)
 ```
+
+### Use multiple characters as one numeral
+```javascript
+import RadixConverter from "meg-rc";
+
+// pass numerals as array
+const converter = new RadixConverter(["ba", "bana", "banana"]);
+
+let a = converter.fromDecimal(123);  // banabanabanabananaba
+let b = converter.intoDecimal(a);    // 123
+```
+
+### Use Emoji
+```javascript
+import RadixConverter from "meg-rc";
+
+// these emoji are made up of multiple characters
+const converter = new RadixConverter(["🧑", "🧑🏻", "🧑🏼", "🧑🏽", "🧑🏾", "🧑🏿"]);
+
+let a = converter.fromDecimal(11190);  // 🧑🏻🧑🏼🧑🏽🧑🏾🧑🏿🧑
+let b = converter.intoDecimal(a);      // 11190
+```
+
+### Disable validation
+```javascript
+import RadixConverter from "meg-rc";
+
+// validation disabled (nothing happens)
+new RadixConverter(["1", "2", "12"], false);
+
+// validation enabled (throws TypeError)
+// Invalid numerals: 12 and 2 cannot be used together 
+new RadixConverter(["1", "2", "12"]);
+```
